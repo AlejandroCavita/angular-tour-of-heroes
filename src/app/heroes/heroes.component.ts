@@ -14,20 +14,14 @@ export class HeroesComponent implements OnInit {
 
   heroes: Hero[];
 
-  selectedHero: Hero ;
-
-  onSelect( hero: Hero ) {
-    this.selectedHero = hero;
+  ngOnInit() {
+    this.getHeroes();
   }
 
   getHeroes(): void {
     this.heroService.getHeroes()
     // this.heroes variable do reference to the variable declared above
       .subscribe(heroes => this.heroes = heroes);
-  }
-
-  ngOnInit() {
-    this.getHeroes();
   }
 
 }
