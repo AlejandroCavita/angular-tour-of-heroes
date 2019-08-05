@@ -21,7 +21,21 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
     // this.heroes variable do reference to the variable declared above
-      .subscribe(heroes => this.heroes = heroes);
+      .subscribe(resp => this.heroes = resp);
+  }
+
+  add(name: string ): void {
+    name = name.trim();
+    if ( !name ) { return; }
+    this.heroService.addHero({name} as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
+
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
   }
 
 }
